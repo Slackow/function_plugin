@@ -5,15 +5,15 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.testFramework.ParsingTestCase;
 import org.antlr.intellij.adaptor.xpath.XPath;
-import org.antlr.jetbrains.sample.SampleLanguage;
-import org.antlr.jetbrains.sample.SampleParserDefinition;
+import org.antlr.jetbrains.func.FuncLanguage;
+import org.antlr.jetbrains.func.FuncParserDefinition;
 
 import java.io.IOException;
 import java.util.Collection;
 
 public class TestXPath extends ParsingTestCase {
 	public TestXPath() {
-		super("", "Sample", new SampleParserDefinition());
+		super("", "Sample", new FuncParserDefinition());
 	}
 
 	public void testSingleVarDef() throws Exception {
@@ -153,7 +153,7 @@ public class TestXPath extends ParsingTestCase {
 		ensureParsed(myFile);
 		assertEquals(code, myFile.getText());
 		final StringBuilder buf = new StringBuilder();
-		Collection<? extends PsiElement> nodes = XPath.findAll(SampleLanguage.INSTANCE, myFile, xpath);
+		Collection<? extends PsiElement> nodes = XPath.findAll(FuncLanguage.INSTANCE, myFile, xpath);
 		for (PsiElement n : nodes) {
 			if ( n instanceof LeafPsiElement ) {
 				buf.append(n.getText());
@@ -166,7 +166,7 @@ public class TestXPath extends ParsingTestCase {
 	// S U P P O R T
 
 	protected void checkXPathResults(String code, String xpath, String allNodesText) throws IOException {
-		checkXPathResults(SampleLanguage.INSTANCE, code, xpath, allNodesText);
+		checkXPathResults(FuncLanguage.INSTANCE, code, xpath, allNodesText);
 	}
 
 	protected void checkXPathResults(Language language, String code, String xpath, String allNodesText) throws IOException {

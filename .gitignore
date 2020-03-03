@@ -4,6 +4,8 @@ hs_err_pid*
 # ANTLR4
 *.tokens
 
+src/main/gen
+
 target/
 /build/
 /.gradle/

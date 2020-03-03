@@ -12,7 +12,7 @@ wrapper {
     gradleVersion = '5.2.1'
 }
 
-group 'antlr'
+group 'function'
 version pluginVersion
 
 apply plugin: 'java'
@@ -27,7 +27,7 @@ compileJava {
 intellij {
     version = ideaVersion
 
-    pluginName 'antlr4-intellij-plugin-sample'
+    pluginName 'antlr4-intellij-plugin-func'
     downloadSources true
     updateSinceUntilBuild false
 }
@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    antlr("org.antlr:antlr4:$antlr4Version") { // use ANTLR version 4
+    antlr("org.antlr:antlr4:4.8") { // use ANTLR version 4
         exclude group:'com.ibm.icu', module:'icu4j'
     }
     implementation 'org.antlr:antlr4-intellij-adaptor:0.1'
@@ -45,5 +45,5 @@ dependencies {
 }
 
 generateGrammarSource {
-    arguments += ["-package", "org.antlr.jetbrains.sample.parser", "-Xexact-output-dir"]
+    arguments += ["-package", "org.antlr.jetbrains.func.parser", "-Xexact-output-dir"]
 }
