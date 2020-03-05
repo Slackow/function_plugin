@@ -55,15 +55,19 @@ public class FuncParserDefinition implements ParserDefinition {
 	public static final TokenSet WHITESPACE =
 		PSIElementTypeFactory.createTokenSet(
 			FuncLanguage.INSTANCE,
-			FuncLexer.WS);
+			FuncLexer.WS,
+			FuncLexer.NEWLINE);
 
 	public static final TokenSet STRING =
 		PSIElementTypeFactory.createTokenSet(
 			FuncLanguage.INSTANCE,
 			FuncLexer.OPEN_STRING,
 				FuncLexer.CLOSE_STRING,
+				FuncLexer.TEXT,
 				FuncLexer.ESCAPE,
-				FuncLexer.TEXT);
+				FuncLexer.ID_INTERP,
+				FuncLexer.ENTER_EXPR_INTERP,
+				FuncLexer.OPEN_FUNCTION_NAME);
 
 	@NotNull
 	@Override

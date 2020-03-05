@@ -6,6 +6,6 @@ public class FuncLanguage extends Language {
     public static final FuncLanguage INSTANCE = new FuncLanguage();
 
     private FuncLanguage() {
-        super("Func");
+        super("Func\040");
     }
 }

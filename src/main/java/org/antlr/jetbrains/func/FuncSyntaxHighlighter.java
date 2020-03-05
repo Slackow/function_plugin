@@ -37,16 +37,18 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 public class FuncSyntaxHighlighter extends SyntaxHighlighterBase {
 	private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 	public static final TextAttributesKey ID =
-		createTextAttributesKey("SAMPLE_ID", DefaultLanguageHighlighterColors.IDENTIFIER);
+		createTextAttributesKey("FUNC_ID", DefaultLanguageHighlighterColors.IDENTIFIER);
 	public static final TextAttributesKey KEYWORD =
-		createTextAttributesKey("SAMPLE_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
+		createTextAttributesKey("FUNC_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
 	public static final TextAttributesKey STRING =
-		createTextAttributesKey("SAMPLE_STRING", DefaultLanguageHighlighterColors.STRING);
+		createTextAttributesKey("FUNC_STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey LINE_COMMENT =
-		createTextAttributesKey("SAMPLE_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
-	public static final TextAttributesKey BLOCK_COMMENT =
-		createTextAttributesKey("SAMPLE_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
-
+		createTextAttributesKey("FUNC_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
+	public static final TextAttributesKey ESCAPE =
+			createTextAttributesKey("FUNC_ESCAPE", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
+	public static final TextAttributesKey SEMI =
+			createTextAttributesKey("FUNC_SEMI", DefaultLanguageHighlighterColors.SEMICOLON);
+	public static final TextAttributesKey PAREN = createTextAttributesKey("FUNC_PAREN", DefaultLanguageHighlighterColors.PARENTHESES);
 	static {
 		//noinspection deprecation
 
@@ -71,6 +73,8 @@ public class FuncSyntaxHighlighter extends SyntaxHighlighterBase {
 		TextAttributesKey attrKey;
 		switch ( ttype ) {
 			case FuncLexer.IDEN :
+			case FuncLexer.ID_INTERP:
+			case FuncLexer.ID_INTERP_COMMAND:
 				attrKey = ID;
 				break;
 			case FuncLexer.VAR :
@@ -99,17 +103,30 @@ public class FuncSyntaxHighlighter extends SyntaxHighlighterBase {
 			case FuncLexer.SWITCH:
 			case FuncLexer.TICK:
 			case FuncLexer.THROW:
+			case FuncLexer.OPEN_FUNCTION:
+			case FuncLexer.THIS_FUNCTION:
 				attrKey = KEYWORD;
 				break;
-			case FuncLexer.OPEN_STRING :
+			case FuncLexer.OPEN_STRING:
 			case FuncLexer.CLOSE_STRING:
 			case FuncLexer.TEXT:
+			case FuncLexer.OPEN_FUNCTION_NAME:
 				attrKey = STRING;
 				break;
 			case FuncLexer.COMMENT :
 				attrKey = LINE_COMMENT;
 				break;
-			default :
+			case FuncLexer.ESCAPE:
+				attrKey = ESCAPE;
+				break;
+			case FuncLexer.SEMI:
+				attrKey = SEMI;
+				break;
+			case FuncLexer.LPAREN:
+			case FuncLexer.RPAREN:
+				attrKey = PAREN;
+				break;
+			default:
 				return EMPTY_KEYS;
 		}
 		return new TextAttributesKey[] {attrKey};

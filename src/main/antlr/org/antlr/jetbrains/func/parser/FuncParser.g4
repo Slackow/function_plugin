@@ -103,12 +103,14 @@ command_part
 | ID_INTERP_COMMAND                                                                                                      # CommandIdInterpPart
 | ENTER_EXPR_INTERP_COMMAND expr RBRACE                                                                                  # CommandExprInterpPart
 | CONTINUE_COMMAND                                                                                                       # CommmandGoOnPart
+| OPEN_FUNCTION_NAME string_part* CLOSE_STRING                                                                           # FunctionReferencePart
+| THIS_FUNCTION                                                                                                          # ThisFunctionPart
 ;
 
 expr
 : LPAREN expr RPAREN                                                                                                     # parExpr
 | expr QUESTION? DOT IDEN                                                                                                # getFromObjectExpr
-| expr LPAREN (expr (COMMA expr)*)? RPAREN                                                                               # runFunctionExpr
+| expr LPAREN (expr (COMMA expr)*)? () RPAREN                                                                               # runFunctionExpr
 | expr LBRACKET expr RBRACKET                                                                                            # getItemExpr
 | expr LBRACKET expr COLON expr (COLON expr)? RBRACKET                                                                   # subExpr
 | MINUS expr                                                                                                             # negationExpr

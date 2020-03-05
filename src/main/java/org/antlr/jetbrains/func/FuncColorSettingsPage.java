@@ -17,7 +17,6 @@ public class FuncColorSettingsPage implements ColorSettingsPage {
 		new AttributesDescriptor("Keyword", FuncSyntaxHighlighter.KEYWORD),
 		new AttributesDescriptor("String", FuncSyntaxHighlighter.STRING),
 		new AttributesDescriptor("Line comment", FuncSyntaxHighlighter.LINE_COMMENT),
-		new AttributesDescriptor("Block comment", FuncSyntaxHighlighter.BLOCK_COMMENT),
 	};
 
 	@Nullable
